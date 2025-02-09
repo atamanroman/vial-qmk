@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                              _______, _______, _______, _______, _______,  _______, _______, _______
   ),
-/* MO(4) 
+/* MO(4)
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                              _______, _______, _______, _______, _______,  _______, _______, _______
   ),
-/* MO(5) 
+/* MO(5)
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -176,7 +176,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 static void render_logo(void) {
-	
+
     static const char PROGMEM logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
         0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2, 0xB3, 0xB4,
@@ -233,20 +233,18 @@ const char *read_keylogs(void) {
 }
 
 static void render_status(void) {
-    oled_write_P(PSTR("layer "), false);
-
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_P(PSTR("QWERTY"), false);
             break;
         case _LOWER:
-            oled_write_P(PSTR("Lower "), false);
+            oled_write_P(PSTR("Colemak DH"), false);
             break;
         case _RAISE:
-            oled_write_P(PSTR("Raise "), false);
+            oled_write_P(PSTR("Symbol"), false);
             break;
         case _ADJUST:
-            oled_write_P(PSTR("Adjust"), false);
+            oled_write_P(PSTR("Func"), false);
             break;
         default:
             sprintf(layer_misc, "MO(%01d) ", get_highest_layer(layer_state));
@@ -254,10 +252,11 @@ static void render_status(void) {
             break;
     }
 
-    oled_write_P(PSTR("  "), false);
+    oled_write_P(PSTR(" @ "), false);
     sprintf(wpm, "%03d", get_current_wpm());
     oled_write(wpm, false);
     oled_write_P(PSTR(" wpm\n"), false);
+    oled_write_P(PSTR("atamanroman.dev -.-"), false);
 }
 
 bool oled_task_user(void) {
@@ -270,4 +269,3 @@ bool oled_task_user(void) {
 }
 
 #endif // OLED_ENABLE
-
